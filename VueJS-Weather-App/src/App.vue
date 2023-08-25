@@ -17,11 +17,16 @@
       </section>
 
       <section class="text-center d-flex justify-content-center">
-        <h1 class="p-3 rounded-3 temperature">32&deg;C</h1>
+        <h1 v-if="weather.main" class="p-3 rounded-3 temperature">
+          {{ Math.round(weather.main.temp) }}&deg;C
+        </h1>
+        <h1 v-else class="p-3 rounded-3 temperature">0&deg;C</h1>
       </section>
 
       <section class="text-center d-flex justify-content-center my-2">
-        <h4 class="p-2 text-light rounded-3 remark">Rain</h4>
+        <h4 v-if="weather.main" class="p-2 text-light rounded-3 remark">
+          {{ weather.weather[0].main }}
+        </h4>
       </section>
 
       <section v-if="typeof weather.main != 'undefined'">
@@ -54,7 +59,7 @@ export default {
 
   methods: {
     fetchWeather(e) {
-      if (e.key == "Enter") {
+      if (e.key === "Enter") {
         fetch(
           `${this.urlBase}weather?q=${this.query}&units=metric&APPID=${this.apiKey}`
         )
