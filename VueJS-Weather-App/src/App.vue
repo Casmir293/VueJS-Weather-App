@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section class="content" :class="backgroundImageClass">
     <main>
       <section>
         <input
@@ -10,7 +10,6 @@
           class="px-3"
         />
       </section>
-
       <section class="text-center mb-5">
         <h3 class="mb-0">{{ formattedDate }}, {{ year }}</h3>
         {{ today }}
@@ -118,6 +117,15 @@ export default {
         weekday: "long",
       };
       return this.date.toLocaleString("en-US", order);
+    },
+
+    backgroundImageClass() {
+      // Determine the background image class based on temperature condition
+      if (this.weather.main && this.weather.main.temp < 16) {
+        return "dark-background";
+      } else {
+        return "light-background";
+      }
     },
   },
 
