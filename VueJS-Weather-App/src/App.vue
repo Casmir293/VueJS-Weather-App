@@ -20,7 +20,6 @@
         <h1 v-if="weather.main" class="p-3 rounded-3 temperature">
           {{ Math.round(weather.main.temp) }}&deg;C
         </h1>
-        <h1 v-else class="p-3 rounded-3 temperature">0&deg;C</h1>
       </section>
 
       <section class="text-center d-flex justify-content-center my-2">
@@ -58,6 +57,29 @@ export default {
   },
 
   methods: {
+    fetchCurrentLocationWeather() {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const url = `${this.urlBase}weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${this.apiKey}`;
+            fetch(url)
+              .then((res) => res.json())
+              .then(this.setResults)
+              .catch((error) => {
+                console.error("Error fetching weather data:", error);
+              });
+          },
+          (error) => {
+            console.error("Error getting geolocation:", error);
+          }
+        );
+      } else {
+        console.error("Geolocation is not available");
+      }
+    },
+
     fetchWeather(e) {
       if (e.key === "Enter") {
         fetch(
@@ -97,6 +119,10 @@ export default {
       };
       return this.date.toLocaleString("en-US", order);
     },
+  },
+
+  mounted() {
+    this.fetchCurrentLocationWeather();
   },
 };
 </script>
