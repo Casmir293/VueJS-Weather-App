@@ -29,7 +29,7 @@
 
       <section v-if="typeof weather.main != 'undefined'">
         <div class="text-center my-5">
-          <h3>{{ weather.name }}, {{ weather.sys.country }}</h3>
+          <h2>{{ weather.name }}, {{ weather.sys.country }}</h2>
         </div>
       </section>
     </main>
@@ -120,8 +120,7 @@ export default {
     },
 
     backgroundImageClass() {
-      // Determine the background image class based on temperature condition
-      if (this.weather.main && this.weather.main.temp < 16) {
+      if (this.weather.main && this.weather.main.temp < 20) {
         return "dark-background";
       } else {
         return "light-background";
