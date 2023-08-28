@@ -7,7 +7,7 @@
           placeholder="Location..."
           v-model="query"
           @keypress="fetchWeather"
-          class="px-3"
+          class="light-input px-3"
         />
       </section>
       <section class="text-center mb-5">
@@ -34,8 +34,8 @@
       </section>
     </main>
 
-    <footer class="text-center p-4">
-      Powered by <a href="https://casmir.dev" class="text-dark">casmir.dev</a>
+    <footer class="text-center p-4 light-footer">
+      Powered by <a href="https://casmir.dev">casmir.dev</a>
     </footer>
   </section>
 </template>
@@ -120,7 +120,7 @@ export default {
     },
 
     backgroundImageClass() {
-      if (this.weather.main && this.weather.main.temp < 20) {
+      if (this.weather.main && this.weather.main.temp < 25) {
         return "dark-background";
       } else {
         return "light-background";

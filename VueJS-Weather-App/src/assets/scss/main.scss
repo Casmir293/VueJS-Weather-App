@@ -35,14 +35,23 @@ main {
   flex: 1;
 }
 
-footer {
+.light-footer {
   background-color: rgba(0, 102, 255, 0.5);
   margin-top: auto;
+  color: black;
+  a {
+    color: black;
+  }
+}
+
+.dark-footer {
+  background-color: rgba(33, 35, 37, 0.5);
+  margin-top: auto;
+  color: white;
 }
 
 input {
   border: none;
-  background-color: rgba(0, 102, 255, 0.3);
   transition: 1s;
   height: 60px;
   margin: 15px;
@@ -54,11 +63,24 @@ input {
   }
   &:focus {
     outline: none;
-    background-color: rgba(0, 102, 255, 0.5);
     border-radius: 0px 20px 0px 20px;
     transition: 1s;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  }
+}
+
+.light-input {
+  background-color: rgba(0, 102, 255, 0.3);
+  &:focus {
+    background-color: rgba(0, 102, 255, 0.5);
+  }
+}
+
+.dark-input {
+  background-color: rgba(33, 35, 37, 0.5);
+  &:focus {
+    background-color: rgba(33, 35, 37, 0.8);
   }
 }
 
