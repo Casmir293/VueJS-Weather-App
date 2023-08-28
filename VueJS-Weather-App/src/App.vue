@@ -1,13 +1,14 @@
 <template>
   <section class="content" :class="backgroundImageClass">
     <main>
-      <section>
+      <section class="">
         <input
           type="text"
           placeholder="Location..."
           v-model="query"
           @keypress="fetchWeather"
-          class="light-input px-3"
+          class="px-3 d-flex mx-auto"
+          :class="inputThemeClass"
         />
       </section>
       <section class="text-center mb-5">
@@ -27,14 +28,14 @@
         </h4>
       </section>
 
-      <section v-if="typeof weather.main != 'undefined'">
+      <section class="location" v-if="typeof weather.main != 'undefined'">
         <div class="text-center my-5">
           <h2>{{ weather.name }}, {{ weather.sys.country }}</h2>
         </div>
       </section>
     </main>
 
-    <footer class="text-center p-4 light-footer">
+    <footer class="text-center p-4" :class="inputFooterClass">
       Powered by <a href="https://casmir.dev">casmir.dev</a>
     </footer>
   </section>
@@ -120,10 +121,26 @@ export default {
     },
 
     backgroundImageClass() {
-      if (this.weather.main && this.weather.main.temp < 25) {
+      if (this.weather.main && this.weather.main.temp < 20) {
         return "dark-background";
       } else {
         return "light-background";
+      }
+    },
+
+    inputThemeClass() {
+      if (this.weather.main && this.weather.main.temp < 20) {
+        return "dark-input";
+      } else {
+        return "light-input";
+      }
+    },
+
+    inputFooterClass() {
+      if (this.weather.main && this.weather.main.temp < 20) {
+        return "dark-footer";
+      } else {
+        return "light-footer";
       }
     },
   },
