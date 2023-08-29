@@ -2,6 +2,7 @@
   <section class="content" :class="backgroundImageClass">
     <main>
       <section class="">
+        <!-- Input for location search -->
         <input
           type="text"
           placeholder="Location..."
@@ -11,18 +12,22 @@
           :class="inputThemeClass"
         />
       </section>
+
       <section class="text-center mb-5">
+        <!-- Display current date and day -->
         <h3 class="mb-0">{{ formattedDate }}, {{ year }}</h3>
         {{ today }}
       </section>
 
       <section class="text-center d-flex justify-content-center">
+        <!-- Display temperature -->
         <h1 v-if="weather.main" class="p-3 rounded-3 temperature">
           {{ Math.round(weather.main.temp) }}&deg;C
         </h1>
       </section>
 
       <section class="text-center d-flex justify-content-center my-2">
+        <!-- Display weather condition -->
         <h4 v-if="weather.main" class="p-2 text-light rounded-3 remark">
           {{ weather.weather[0].main }}
         </h4>
