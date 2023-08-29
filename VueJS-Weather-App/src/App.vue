@@ -33,7 +33,8 @@
         </h4>
       </section>
 
-      <section class="location" v-if="typeof weather.main != 'undefined'">
+      <section class="location" v-if="weather.main">
+        <!-- Display location name and country -->
         <div class="text-center my-5">
           <h2>{{ weather.name }}, {{ weather.sys.country }}</h2>
         </div>
@@ -41,6 +42,7 @@
     </main>
 
     <footer class="text-center p-4" :class="inputFooterClass">
+      <!-- Footer attribution -->
       Powered by <a href="https://casmir.dev">casmir.dev</a>
     </footer>
   </section>
@@ -63,6 +65,7 @@ export default {
 
   methods: {
     fetchCurrentLocationWeather() {
+      // Fetch weather data based on user's geolocation
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -86,6 +89,7 @@ export default {
     },
 
     fetchWeather(e) {
+      // Fetch weather data based on user's query
       if (e.key === "Enter") {
         fetch(
           `${this.urlBase}weather?q=${this.query}&units=metric&APPID=${this.apiKey}`
@@ -101,12 +105,14 @@ export default {
     },
 
     setResults(results) {
+      // Set fetched weather data to the 'weather' property
       this.weather = results;
     },
   },
 
   computed: {
     formattedDate() {
+      // Format and display the current date
       const order = {
         day: "2-digit",
         month: "short",
@@ -115,10 +121,12 @@ export default {
     },
 
     year() {
+      // Display the current year
       return this.date.getFullYear();
     },
 
     today() {
+      // Display the current day
       const order = {
         weekday: "long",
       };
@@ -126,6 +134,7 @@ export default {
     },
 
     backgroundImageClass() {
+      // Set background image class based on temperature
       if (this.weather.main && this.weather.main.temp < 20) {
         return "dark-background";
       } else {
@@ -134,6 +143,7 @@ export default {
     },
 
     inputThemeClass() {
+      // Set input theme class based on temperature
       if (this.weather.main && this.weather.main.temp < 20) {
         return "dark-input";
       } else {
@@ -142,6 +152,7 @@ export default {
     },
 
     inputFooterClass() {
+      // Set footer theme class based on temperature
       if (this.weather.main && this.weather.main.temp < 20) {
         return "dark-footer";
       } else {
@@ -151,6 +162,7 @@ export default {
   },
 
   mounted() {
+    // Fetch weather data for the user's current location on component mount
     this.fetchCurrentLocationWeather();
   },
 };
